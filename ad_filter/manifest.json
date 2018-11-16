@@ -3,14 +3,6 @@
     "name": "url过滤",
     "version": "1.0.0",
     "description": "简单url过滤规则",
-    "content_scripts": 
-    [
-        {
-            "matches": ["<all_urls>"],
-            "js": ["js/test.js"],
-            "run_at": "document_start"
-        }
-    ],
     "background":
     {
         "scripts": ["js/background.js"]
