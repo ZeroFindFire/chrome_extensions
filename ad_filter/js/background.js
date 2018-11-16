@@ -16,7 +16,8 @@ var chinese_language_env = {
     remove_db:'删除过滤库',
     list_dbs:'过滤库列表',
     dbs_clean:'删除所有过滤库',
-    check_dbs_clean:'确认删除所有过滤库？'
+    check_dbs_clean:'确认删除所有过滤库？',
+    clip_copy:'复制到剪贴板'
 }
 var english_language_env = {
     remove_forbid:'remove forbid',
@@ -123,6 +124,26 @@ var remove_all_id = chrome.contextMenus.create({
     }
 });
 
+var clip_copy_id = chrome.contextMenus.create({
+    title: language_env.clip_copy,
+    contexts:['all'],
+    onclick: function(clickData){
+        s = Object.keys(forbids).join(" ");
+        var oInput = document.getElementById('clip');
+        if (!oInput) {
+            oInput = document.createElement('input');
+            oInput.id = 'clip';
+            document.body.appendChild(oInput);
+        }
+        oInput.style.display='inline';
+        oInput.innerHTML = s;
+        oInput.value = s;
+        oInput.select();
+        document.execCommand("Copy");
+        oInput.style.display='none';
+        alert('succeed!');
+    }
+});
 var db_menu_id = chrome.contextMenus.create({
     title: language_env.db,
     contexts:['all']

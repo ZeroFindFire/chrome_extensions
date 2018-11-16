@@ -2,10 +2,13 @@ var background = chrome.extension.getBackgroundPage();
 var message = document.getElementById("message");
 function add_forbid(){
     var url_tab = document.getElementById("input");
-    var url = url_tab.value
-    background.add(url);
-    url_tab.value = '';
-    message.innerHTML = url+background.language_env.done_add_forbid;
+    var urls = url_tab.value.split(" ");
+    //alert("urls:"+url_tab.innerText);
+    urls.forEach(function(url,index){
+        background.add(url);
+    });
+    url_tab.innerHTML = '';
+    message.innerHTML = background.language_env.done_add_forbid;
     message.style.display="inline";
     setTimeout(function(){
         message.style.display="none";
